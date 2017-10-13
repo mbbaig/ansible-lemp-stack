@@ -1,0 +1,10 @@
+---
+- hosts: testservers
+  become: true
+  become_method: sudo
+  vars_files:
+    - vars/local.yml
+  roles:
+    - geerlingguy.repo-epel
+    - geerlingguy.repo-remi
+    - geerlingguy.nginx
