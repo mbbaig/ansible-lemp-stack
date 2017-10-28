@@ -1,3 +1,11 @@
+mysql_root_password: "super secret root password"
+mysql_databases:
+  - name: "appDbName"
+mysql_users:
+  - name: "appDbUser"
+    password: "super secet user password"
+    priv: "appDbName.*:ALL"
+
 nginx_yum_repo_enabled: true
 nginx_vhosts:
   - listen: "80"
@@ -25,3 +33,24 @@ nginx_vhosts:
                 include fastcgi_params;
             }
         }
+
+php_webserver_daemon: "nginx"
+php_enablerepo: "remi-php71,epel"
+php_packages_state: "latest"
+php_enable_php_fpm: true
+php_packages:
+  - php
+  - php-common
+  - php-fpm
+  - php-opcache
+  - php-cli
+  - php-mysql
+  - php-gd
+  - php-mbstring
+  - php-mcrypt
+  - php-pdo
+  - php-pear
+  - php-xml
+  - php-apcu
+  - php-pecl-apcu
+  - phpmyadmin

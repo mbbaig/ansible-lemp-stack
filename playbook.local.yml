@@ -8,3 +8,5 @@
     - geerlingguy.repo-epel
     - geerlingguy.repo-remi
     - geerlingguy.nginx
+    - geerlingguy.mysql
+    - geerlingguy.php

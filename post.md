@@ -363,6 +363,52 @@ php_packages:
 
 The PHP varialbes that we added tell role which webserver we are using, which repos to enable, which version of the packages should be installed, whether to use PHP FPM, and which packages to install specifically. Notice that we are also installing **phpmyadmin**.
 
+Our playbook now looks like this:
+
+```python
+---
+- hosts: testservers
+  become: true
+  become_method: sudo
+  vars_files:
+    - vars/local.yml
+  roles:
+    - geerlingguy.repo-epel
+    - geerlingguy.repo-remi
+    - geerlingguy.nginx
+    - geerlingguy.mysql
+    - geerlingguy.php
+```
+
 ## Custom Role
 
-We will now create a custom role that will copy our source code from our speficied directory and place in the right directory on our web server.
+We will now create a custom role that will copy our source code from our speficied directory and place in the right directory on our web server. We can use the following command to create a role skeleton:
+
+```shell
+ansible-galaxy init --init-path roles/ app.source
+```
+
+Ansible galaxy will then create a directory structure for a role.
+
+```shell
+.
+|-- README.md
+|-- defaults
+|   `-- main.yml
+|-- files
+|-- handlers
+|   `-- main.yml
+|-- meta
+|   `-- main.yml
+|-- tasks
+|   `-- main.yml
+|-- templates
+|-- tests
+|   |-- inventory
+|   `-- test.yml
+`-- vars
+    `-- main.yml
+```
+
+We will mainly be working tasks, defaults, files, and the vars directories.
+
