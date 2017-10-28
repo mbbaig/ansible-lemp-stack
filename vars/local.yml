@@ -2,26 +2,26 @@ nginx_yum_repo_enabled: true
 nginx_vhosts:
   - listen: "80"
     server_name: "app.local"
-    root: "/var/www/app"
+    root: "{{ web_root }}"
     index: "index.php index.html index.htm"
     state: "present"
     filename: "app.local.conf"
     extra_parameters: |
-      location ~ \.php$ {
-          include fastcgi_params;
-          fastcgi_pass 127.0.0.1:9000;
-          fastcgi_index app.php;
-          fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-          try_files $uri =404;
-      }
-      location /phpMyAdmin {
-          root {{ phpMyAdmin_dest }};
-          index index.php index.html index.htm;
-          location ~ \.php$ {
-              try_files $uri =404;
-              fastcgi_pass 127.0.0.1:9000;
-              fastcgi_index index.php;
-              fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-              include fastcgi_params;
-          }
-      }
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index app.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            try_files $uri =404;
+        }
+        location /phpMyAdmin {
+            root {{ phpMyAdmin_dest }};
+            index index.php index.html index.htm;
+            location ~ \.php$ {
+                try_files $uri =404;
+                fastcgi_pass 127.0.0.1:9000;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+            }
+        }

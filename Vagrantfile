@@ -70,8 +70,8 @@ Vagrant.configure("2") do |config|
     # end
 
     config.vm.provision "ansible" do |ansible|
-      ansible.inventory_path = "./inventory/inventory.ini"
-      ansible.limit = "testservers"
-      ansible.playbook = "playbook.local.yml"
+        ansible.inventory_path = "./inventory/inventory.ini"
+        ansible.limit = "testservers"
+        ansible.playbook = "playbook.local.yml"
     end
-  end
+end
