@@ -410,5 +410,19 @@ Ansible galaxy will then create a directory structure for a role.
     `-- main.yml
 ```
 
-We will mainly be working tasks, defaults, files, and the vars directories.
+We will mainly be working tasks, defaults, and the files directories.
+
+Let's put a simple file called *app.php* in the *files* directory.
+
+```php
+<?php
+
+phpinfo();
+```
+
+We will now add to the *main.yml* file in the *defaults* directory. This is where *web_root* from the previous section is defined.
+
+```python
+web_root: /var/www/app
+```
 
