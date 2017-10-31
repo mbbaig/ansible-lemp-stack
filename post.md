@@ -456,5 +456,60 @@ The tasks are pretty self expalanatory. The create the necessary directories and
 Similar to before use the **ansible-galaxy** command to create the role for specifying phpMyAdmin config.
 
 ```shell
-ansible-galaxy
+ansible-galaxy init --init-path roles/ app.phpmyadmin
 ```
+
+Now let's add the defaults and tasks to this role.
+
+Defaults:
+
+```python
+---
+# defaults file for app.phpmyadmin
+phpMyAdmin_src: /usr/share/phpMyAdmin
+phpMyAdmin_dest: /usr/share/nginx/html
+```
+
+Tasks:
+
+```python
+---
+# tasks file for app.phpmyadmin
+
+- name: "Create Symlink to the phpMyAdmin dir"
+  file:
+    src: "{{ phpMyAdmin_src }}"
+    dest: "{{ phpMyAdmin_dest }}/phpMyAdmin"
+    state: link
+    force: yes
+```
+
+That should do it. We have setup all of the necessary roles and files.
+
+## Running it all
+
+Now all we need to do is run the vagrant and it will setup everything. Use your terminal to navigate to the root of your project and run.
+
+```shell
+vagrant up
+```
+
+if you have a vagrant box already running, you can use.
+
+```shell
+vagrant provision
+```
+
+Once everything is finished running you should be able to navigate to [192.168.33.10](http://192.168.33.10) to view your PHP page.
+
+![php info image](https://mbbaig.files.wordpress.com/2017/10/screenshot-from-2017-10-30-23-02-52.png)
+
+And to verify that php my admin and MariaDb is working we can navigate to [192.168.33.10/phpMyAdmin](http://192.168.33.10/phpMyAdmin) and check. We will need to login with either the root user or the *appDbUser* that we specified earlier. Just so we test out our created user we can use *appDbUser* and its password to login. We should see the following.
+
+![php my admin page](https://mbbaig.files.wordpress.com/2017/10/screenshot-from-2017-10-30-23-02-03.png)
+
+Hopefully that was usefull and saved everybody some time. It does same me a lot of time.
+
+The final source for all this can be found on github.
+
+Github: https://github.com/mbbaig/ansible-lemp-stack
