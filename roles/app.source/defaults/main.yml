@@ -1,3 +1,4 @@
 ---
 # defaults file for app.source
 web_root: /var/www/app
+web_user: nginx

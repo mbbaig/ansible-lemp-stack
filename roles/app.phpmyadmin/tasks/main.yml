@@ -1,0 +1,9 @@
+---
+# tasks file for app.phpmyadmin
+
+- name: "Create Symlink to the phpMyAdmin dir"
+  file:
+    src: "{{ phpMyAdmin_src }}"
+    dest: "{{ phpMyAdmin_dest }}/phpMyAdmin"
+    state: link
+    force: yes

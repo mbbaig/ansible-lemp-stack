@@ -10,3 +10,5 @@
     - geerlingguy.nginx
     - geerlingguy.mysql
     - geerlingguy.php
+    - app.source
+    - app.phpmyadmin

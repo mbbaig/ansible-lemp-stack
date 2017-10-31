@@ -380,7 +380,7 @@ Our playbook now looks like this:
     - geerlingguy.php
 ```
 
-## Custom Role
+## Source Custom Role
 
 We will now create a custom role that will copy our source code from our speficied directory and place in the right directory on our web server. We can use the following command to create a role skeleton:
 
@@ -423,6 +423,38 @@ phpinfo();
 We will now add to the *main.yml* file in the *defaults* directory. This is where *web_root* from the previous section is defined.
 
 ```python
+---
+# defaults file for app.source
 web_root: /var/www/app
+web_user: nginx
 ```
 
+Now let's define the tasks.
+
+```python
+---
+# tasks file for app.source
+
+- name: "Create {{ web_root }} directory"
+  file:
+    path: "{{ web_root }}"
+    state: directory
+
+- name: "Copy source code to {{ web_root }} dir"
+  copy:
+    src: "files/index.php"
+    dest: "{{ web_root }}"
+    owner: "{{ web_user }}"
+    group: "{{ web_user }}"
+    mode: 0644
+```
+
+The tasks are pretty self expalanatory. The create the necessary directories and copy over the source code.
+
+## PHPMyAdmin Custome Role
+
+Similar to before use the **ansible-galaxy** command to create the role for specifying phpMyAdmin config.
+
+```shell
+ansible-galaxy
+```

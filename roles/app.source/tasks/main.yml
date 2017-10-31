@@ -1,2 +1,15 @@
 ---
 # tasks file for app.source
+
+- name: "Create {{ web_root }} directory"
+  file:
+    path: "{{ web_root }}"
+    state: directory
+
+- name: "Copy source code to {{ web_root }} dir"
+  copy:
+    src: "files/index.php"
+    dest: "{{ web_root }}"
+    owner: "{{ web_user }}"
+    group: "{{ web_user }}"
+    mode: 0644

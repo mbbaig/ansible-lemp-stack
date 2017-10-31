@@ -1,0 +1,4 @@
+---
+# defaults file for app.phpmyadmin
+phpMyAdmin_src: /usr/share/phpMyAdmin
+phpMyAdmin_dest: /usr/share/nginx/html
